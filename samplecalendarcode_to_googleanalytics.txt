@@ -1,0 +1,59 @@
+<?php
+$specialdate= $node->field_date_of_event['und']['0']['value'];
+$enddateshow= $node->field_date_of_event['und']['0']['value2'];
+$locationtopass = $node->field_locationofevent['und']['0']['name'];
+$addresstopass = $node->field_locationofevent['und']['0']['street'];
+$citytopass = $node->field_locationofevent['und']['0']['city'];
+
+$piecesbegin = explode("-", $specialdate);
+$yearshowbegin = $piecesbegin[0]; // piece1
+$monthshowbegin= $piecesbegin[1]; // piece2
+$dayshowbegin= $piecesbegin[2]; // piece3
+$dayshowrenderbegin = explode(" ", $dayshowbegin);
+$dayshowrendercorrectbegin = $dayshowrenderbegin[0];
+$timeshowrenderbegin = $dayshowrenderbegin[1];
+$timeshowcorrectbegin= explode (":", $timeshowrenderbegin);
+$timeshowcorrecthourbegin= $timeshowcorrectbegin[0];
+$timeshowcorrectminutebegin= $timeshowcorrectbegin[1];
+
+
+$piecesending = explode("-", $enddateshow);
+$yearshowending = $piecesending[0]; // piece1
+$monthshowending= $piecesending[1]; // piece2
+$dayshowending= $piecesending[2]; // piece3
+$dayshowrenderending = explode(" ", $dayshowending);
+$dayshowrendercorrectending = $dayshowrenderending[0];
+$timeshowrenderending = $dayshowrenderending[1];
+$timeshowcorrectending= explode (":", $timeshowrenderending);
+$timeshowcorrecthourending= $timeshowcorrectending[0];
+$timeshowcorrectminuteending= $timeshowcorrectending[1];
+
+
+
+
+
+$showmygoogledatebegin= "$yearshowbegin$monthshowbegin$dayshowrendercorrectbegin"."T"."$timeshowcorrecthourbegin$timeshowcorrectminutebegin"."00Z";
+
+
+$showmygoogledateending= "$yearshowending$monthshowending$dayshowrendercorrectending"."T"."$timeshowcorrecthourending$timeshowcorrectminuteending"."00Z";
+
+
+
+
+$displaytitleshow = preg_replace('/\s/', '%20', $title);
+$permlocation= preg_replace('/\s/', '%20', $locationtopass);
+$permaddress= preg_replace('/\s/', '%20', $addresstopass);
+$permcity= preg_replace('/\s/', '%20', $citytopass);
+
+
+
+print "<div id=showeventgoogle><a href=http://www.google.com/calendar/event?action=TEMPLATE&amp;dates=$showmygoogledatebegin";
+print "/";
+print "$showmygoogledateending";
+print "&amp;text=$displaytitleshow&amp;";
+print "details=$permlocation%0ADetails%20at%20http://www.mywebsite.com";
+print "$node_url";
+print "&amp;location=$permaddress%20$permcity>";
+print "<img src=/sites/default/files/icons/googlecalendaricon.png width=43 border=0 alt=GoogleCalendar align=left hspace=5></a></div>";
+
+?>
