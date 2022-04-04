@@ -28,6 +28,7 @@ Carryon Bag:
 * Pencils
 * Sharpies
 * Scarf / kerchief
+* Notepad
 
 
 * Glasses repair kit
@@ -58,6 +59,9 @@ Toiletries:
 * Toothbrush & Charger
 * Toothpaste
 * Floss
+
+* Eyedrops
+* Contact lenses
 
 * Deodorant
 * Soap 
