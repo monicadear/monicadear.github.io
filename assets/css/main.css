@@ -78,9 +78,32 @@ display: block;
 float: right;
 width: 45%;
 clear: both;
-margin: 0 5px 0 auto;
-padding: 0;
+margin: 0 auto;
+padding: 5px;
 }
+
+#showcolumnsideleft {
+display: block;
+float: left;
+width: 30%;
+clear: both;
+margin: 0 10% 0 auto;
+padding: 5px 15px 5px 5px;
+border-right: 1px solid #CCC;
+}
+
+#showcolumnsideright {
+display: block;
+float: right;
+width: 30%;
+clear: both;
+margin: 0 auto 0 10%;
+padding: 5px 5px 5px 15px;
+border-left: 1px solid #CCC;
+}
+
+
+
 
 /* Basic */
 
@@ -176,6 +199,8 @@ padding: 0;
 		a:hover {
 			border-bottom-color: transparent;
 		}
+
+
 
 	strong, b {
 		font-weight: 600;
@@ -3666,6 +3691,12 @@ padding: 0;
 				border-bottom-color: transparent;
 				color: #18bfef !important;
 			}
+
+			#nav a:onthis {
+				border-bottom-color: transparent;
+				color: #FF0000 !important;
+			}
+
 
 		#nav strong, #nav b {
 			color: #ffffff;
