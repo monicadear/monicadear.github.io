@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lansing Economic Growth Roadmap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #FFF;
+            min-height: 100vh;
+            overflow-x: auto;
+
+        }
+        
+        .roadmap-container {
+            position: relative;
+            margin: 0 auto;
+            width: 80%;
+            border: 10px solid #000;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #895ba2 100%);
+        }
+        
+        .title {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .title h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .title p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+        
+        .road {
+            position: relative;
+            width: 100%;
+            height: 20px;
+            background: linear-gradient(90deg, #64748b 0%, #475569 50%, #64748b 100%);
+            border-radius: 10px;
+            margin: 50px 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .road::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: repeating-linear-gradient(90deg, white 0px, white 20px, transparent 20px, transparent 40px);
+            transform: translateY(-50%);
+        }
+        
+        .milestones {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 80px 20px;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+        
+        .milestone {
+            background: white;
+            border-radius: 20px;
+            padding: 45px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            flex: 1;
+            min-width: 215px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .milestone::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: var(--accent-color);
+        }
+        
+        .milestone:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+        
+        .milestone.college-grads {
+            --accent-color: #8b5cf6;
+        }
+        
+        .milestone.gen-z {
+            --accent-color: #10b981;
+        }
+        
+        .milestone.gen-x {
+            --accent-color: #3b82f6;
+        }
+        
+        .milestone.employers {
+            --accent-color: #64748b;
+        }
+        
+        .milestone.small-business {
+            --accent-color: #8b5cf6;
+        }
+        
+        .milestone.startups {
+            --accent-color: #10b981;
+        }
+        
+        .milestone-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            color: white;
+            background: var(--accent-color);
+        }
+        
+        .milestone h3 {
+            color: #1f2937;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .milestone ul {
+            list-style: none;
+            color: #4b5563;
+        }
+        
+        .milestone li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .milestone li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .outcome-section {
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            margin: 60px auto;
+            max-width: 1000px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .outcome-section h2 {
+            color: #1f2937;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .outcomes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .outcome-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .outcome-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .outcome-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .outcome-card h4 {
+            color: #1f2937;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .outcome-card p {
+            color: #64748b;
+            line-height: 1.5;
+        }
+        
+        .cta-section {
+            text-align: center;
+            margin: 60px 0;
+        }
+        
+        .cta-button {
+            background: #000;
+            color: white;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+        }
+        
+        @media (max-width: 768px) {
+            .milestones {
+                flex-direction: column;
+            }
+            
+            .milestone {
+                min-width: 100%;
+            }
+            
+            .title h1 {
+                font-size: 2em;
+            }
+            
+            .title p {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="roadmap-container">
+        <div class="title">
+            <h1>🚀 Lansing Growth Roadmap</h1>
+            <p>Building Michigan's Future Together</p>
+        </div>
+        
+        <div class="road"></div>
+        
+        <div class="milestones">
+            <div class="milestone college-grads">
+                <div class="milestone-icon">🎓</div>
+                <h3>College Graduates</h3>
+                <ul>
+                    <li>Stay local after graduation</li>
+                    <li>Join emerging tech companies</li>
+                    <li>Launch innovation projects</li>
+                    <li>Mentor underclassmen</li>
+                    <li>Build professional networks</li>
+                    <li>Volunteer with local nonprofits and community groups</li>
+                </ul>
+            </div>
+            
+            <div class="milestone gen-z">
+                <div class="milestone-icon">⚡</div>
+                <h3>Gen Z</h3>
+                <ul>
+                    <li>Create digital content & brands</li>
+                    <li>Start social impact ventures</li>
+                    <li>Drive sustainability initiatives</li>
+                    <li>Build online communities</li>
+                    <li>Include a variety of voices</li>
+                    <li>Champion equitable investment</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="road"></div>
+        
+        <div class="milestones">
+            <div class="milestone gen-x">
+                <div class="milestone-icon">💼</div>
+                <h3>Gen X</h3>
+                <ul>
+                    <li>Provide leadership & mentorship</li>
+                    <li>Invest in local businesses</li>
+                    <li>Share industry expertise</li>
+                    <li>Build strategic partnerships</li>
+                    <li>Guide workforce development</li>
+                </ul>
+            </div>
+            
+            <div class="milestone employers">
+                <div class="milestone-icon">🏢</div>
+                <h3>Employers</h3>
+                <ul>
+                    <li>Expand local operations</li>
+                    <li>Partner with universities</li>
+                    <li>Offer internship programs</li>
+                    <li>Invest in employee training</li>
+                    <li>Support community initiatives</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="road"></div>
+        
+        <div class="milestones">
+            <div class="milestone small-business">
+                <div class="milestone-icon">🏪</div>
+                <h3>Small Business Owners</h3>
+                <ul>
+                    <li>Hire locally & pay well</li>
+                    <li>Collaborate with other businesses</li>
+                    <li>Innovate products & services</li>
+                    <li>Support local suppliers</li>
+                    <li>Engage in civic activities</li>
+                </ul>
+            </div>
+            
+            <div class="milestone startups">
+                <div class="milestone-icon">🚀</div>
+                <h3>Startups</h3>
+                <ul>
+                    <li>Leverage MSU/local talent</li>
+                    <li>Scale innovative solutions</li>
+                    <li>Attract venture capital</li>
+                    <li>Create high-paying jobs</li>
+                    <li>Build tech ecosystem</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="outcome-section">
+            <h2>🎯 Lansing 2045 Vision</h2>
+            <div class="outcomes">
+                <div class="outcome-card">
+                    <div class="outcome-icon">📈</div>
+                    <h4>Economic Growth</h4>
+                    <p>25,000+ new jobs created across diverse industries</p>
+                </div>
+                
+                <div class="outcome-card">
+                    <div class="outcome-icon">🌟</div>
+                    <h4>Innovation Hub</h4>
+                    <p>Premier destination for startups and tech companies</p>
+                </div>
+                
+                <div class="outcome-card">
+                    <div class="outcome-icon">🤝</div>
+                    <h4>Talent Retention</h4>
+                    <p>Keep 80% of graduates in the region post-graduation</p>
+                </div>
+                
+                <div class="outcome-card">
+                    <div class="outcome-icon">💰</div>
+                    <h4>Investment</h4>
+                    <p>$2B+ in new business investment and development</p>
+                </div>
+                
+                <div class="outcome-card">
+                    <div class="outcome-icon">🏗️</div>
+                    <h4>Infrastructure</h4>
+                    <p>Modern transit, broadband, and sustainable energy systems</p>
+                </div>
+                
+                <div class="outcome-card">
+                    <div class="outcome-icon">💻</div>
+                    <h4>Technology</h4>
+                    <p>Leading-edge tech sector with AI, biotech, and clean energy focus</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <button class="cta-button" onclick="showJoinInfo()">
+                Join the Movement! 🌟 Get Involved</a>
+            </button>
+        </div>
+    </div>
+
+    This was generated from publicly available information and shared as an artifact here: <a href=https://claude.ai/public/artifacts/d02a4e50-0cae-4ae0-ab80-d3c4a1308313>https://claude.ai/public/artifacts/d02a4e50-0cae-4ae0-ab80-d3c4a1308313</a>
+    
+    <script>
+        function showJoinInfo() {
+            alert('Ready to help Lansing grow? 🚀\n\n• Contact local economic development\n• Join chamber of commerce\n• Attend networking events\n• Start or support local initiatives\n• Connect with MSU partnerships\n\nTogether we are building Lansing\'s future!');
+        }
+        
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const milestones = document.querySelectorAll('.milestone');
+            
+            milestones.forEach(milestone => {
+                milestone.addEventListener('click', function() {
+                    this.style.transform = 'scale(1.02)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 200);
+                });
+            });
+            
+            // Animate elements on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+            
+            milestones.forEach(milestone => {
+                milestone.style.opacity = '0';
+                milestone.style.transform = 'translateY(30px)';
+                milestone.style.transition = 'all 0.6s ease';
+                observer.observe(milestone);
+            });
+        });
+    </script>
+</body>
+</html>
